@@ -178,7 +178,7 @@ public class ProfesorDao {
             if (conexion.conectarse()) {
 
                 //El like se utiliza con strings, para que todos empiezen con letras en especifico, busqueda general
-                pst = conexion.getConexion().prepareStatement("select * from biblioteca.profesor where nombre = ?");
+                pst = conexion.getConexion().prepareStatement("select * from biblioteca.profesor where cedula = ?");
 
                 //Los porcentajes es para que busque al inicio o al final
                 pst.setInt(1, cedula);

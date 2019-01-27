@@ -14,7 +14,7 @@ public class Conexion {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/biblioteca?useSSL=false&serverTimezone=UTC";
             String usuario = "root";
-            String password = "root";
+            String password = "12345678";
 
             this.conexion = (Connection) DriverManager.getConnection(url, usuario, password);
             return true;

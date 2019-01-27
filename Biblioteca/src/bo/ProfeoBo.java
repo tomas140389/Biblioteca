@@ -7,6 +7,7 @@ import java.util.List;
 public class ProfeoBo {
     private ProfesorDao profeDao;
     
+    //Constructor
     public ProfeoBo(){
         this.profeDao = new ProfesorDao();
     }
