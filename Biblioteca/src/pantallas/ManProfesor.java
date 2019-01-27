@@ -5,7 +5,7 @@ import clases.Profesor;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
 
 /**
  *
@@ -105,7 +105,7 @@ public class ManProfesor extends javax.swing.JFrame {
 
         jLabel1.setText("Escuela");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(276, 140, 50, 14);
+        jLabel1.setBounds(276, 140, 50, 16);
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,17 +114,17 @@ public class ManProfesor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar);
-        btnAgregar.setBounds(50, 210, 71, 23);
+        btnAgregar.setBounds(50, 210, 93, 29);
         getContentPane().add(txtEscuela);
         txtEscuela.setBounds(350, 140, 140, 30);
 
         jLabel2.setText("Cédula");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(43, 90, 50, 14);
+        jLabel2.setBounds(43, 90, 50, 16);
 
         jLabel3.setText("Nombre");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(277, 90, 50, 14);
+        jLabel3.setBounds(277, 90, 50, 16);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Mantenimiento de Profesores");
@@ -133,7 +133,7 @@ public class ManProfesor extends javax.swing.JFrame {
 
         jLabel5.setText("Salario");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(42, 140, 50, 14);
+        jLabel5.setBounds(42, 140, 50, 16);
         getContentPane().add(txtSalario);
         txtSalario.setBounds(110, 140, 140, 30);
         getContentPane().add(txtNombre);
@@ -148,7 +148,7 @@ public class ManProfesor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEliminar);
-        btnEliminar.setBounds(160, 210, 69, 23);
+        btnEliminar.setBounds(160, 210, 95, 29);
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +157,7 @@ public class ManProfesor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnModificar);
-        btnModificar.setBounds(330, 210, 80, 23);
+        btnModificar.setBounds(330, 210, 80, 29);
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -166,15 +166,15 @@ public class ManProfesor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpiar);
-        btnLimpiar.setBounds(440, 210, 73, 23);
+        btnLimpiar.setBounds(440, 210, 73, 29);
 
         btnConsultaCedula.setText("Consulta por cedula");
         getContentPane().add(btnConsultaCedula);
-        btnConsultaCedula.setBounds(70, 260, 140, 23);
+        btnConsultaCedula.setBounds(70, 260, 140, 29);
 
         btnConsultaNombre.setText("Consulta por nombre");
         getContentPane().add(btnConsultaNombre);
-        btnConsultaNombre.setBounds(340, 260, 160, 23);
+        btnConsultaNombre.setBounds(340, 260, 160, 29);
 
         tablaProfes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -195,7 +195,7 @@ public class ManProfesor extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaProfes);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(60, 320, 452, 402);
+        jScrollPane1.setBounds(60, 320, 454, 404);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
