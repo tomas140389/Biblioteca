@@ -102,7 +102,7 @@ public class MantLibro extends javax.swing.JFrame {
             bandera = false;
         } else {
             try {
-                double numero = Integer.parseInt(txtPrecio.getText());
+                double numero = Double.parseDouble(txtPrecio.getText());
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Digite solamente numeros por favor");
                 bandera = false;
