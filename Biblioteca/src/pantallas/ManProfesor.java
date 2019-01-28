@@ -6,7 +6,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author Estudiante
@@ -265,7 +264,7 @@ public class ManProfesor extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Digite solamente numeros.");
             }
         }
-
+        limpiar();
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -276,7 +275,7 @@ public class ManProfesor extends javax.swing.JFrame {
 
     private void tablaProfesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProfesMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount() == 2){
+        if (evt.getClickCount() == 2) {
             int fila = tablaProfes.getSelectedRow();
             txtCedula.setText(tablaProfes.getValueAt(fila, 0).toString());
             txtNombre.setText(tablaProfes.getValueAt(fila, 1).toString());
@@ -304,7 +303,7 @@ public class ManProfesor extends javax.swing.JFrame {
                     break;
                 case 1:
                     JOptionPane.showMessageDialog(null, "No se modifico el registro correctamente");
-                    break;             
+                    break;
                 case 2:
                     JOptionPane.showMessageDialog(null, "Ocurrio un error inesperado");
                     break;

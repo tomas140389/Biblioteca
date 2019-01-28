@@ -7,7 +7,7 @@ public class Libro {
     private Integer codigo;
     private String nombre;
     private String autor;
-    private Date ano;
+    private Integer ano;
     private Double precio;
 
     public Integer getCodigo() {
@@ -34,14 +34,6 @@ public class Libro {
         this.autor = autor;
     }
 
-    public Date getAno() {
-        return ano;
-    }
-
-    public void setAno(Date ano) {
-        this.ano = ano;
-    }
-
     public Double getPrecio() {
         return precio;
     }
@@ -49,6 +41,13 @@ public class Libro {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
-    
+
+    public Integer getAno() {
+        return ano;
+    }
+
+    public void setAno(Integer ano) {
+        this.ano = ano;
+    }
     
 }

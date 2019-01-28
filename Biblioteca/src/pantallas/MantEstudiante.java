@@ -24,6 +24,7 @@ public class MantEstudiante extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         estudianteBo = new EstudianteBo();
+        llenarTabla();
     }
 
     public void llenarTabla() {
@@ -332,7 +333,7 @@ public class MantEstudiante extends javax.swing.JFrame {
 
         } else {
             try {
-                int numero = Integer.parseInt(txtCedula.getText());
+                //int numero = Integer.parseInt(txtCedula.getText());
 
                 Estudiante estudiante = new Estudiante();
 
