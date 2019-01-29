@@ -2,6 +2,7 @@ package pantallas;
 
 import bo.ProfeoBo;
 import clases.Profesor;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -168,10 +169,20 @@ public class ManProfesor extends javax.swing.JFrame {
         btnLimpiar.setBounds(440, 210, 73, 29);
 
         btnConsultaCedula.setText("Consulta por cedula");
+        btnConsultaCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaCedulaActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnConsultaCedula);
         btnConsultaCedula.setBounds(70, 260, 140, 29);
 
         btnConsultaNombre.setText("Consulta por nombre");
+        btnConsultaNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaNombreActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnConsultaNombre);
         btnConsultaNombre.setBounds(340, 260, 160, 29);
 
@@ -311,6 +322,58 @@ public class ManProfesor extends javax.swing.JFrame {
         }
         limpiar();
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnConsultaCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaCedulaActionPerformed
+        // TODO add your handling code here:
+        if (txtCedula.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Digite la cedula del profesor por favor");
+        } else {
+            try {
+                modelProfesor.setRowCount(0);
+
+                Profesor profesor = new Profesor();
+                profesor = profeBo.consultaCedula(Integer.parseInt(txtCedula.getText()));
+
+                if (profesor.getCedula() == Integer.parseInt(txtCedula.getText())) {
+                    modelProfesor.setRowCount(1);
+                } else {
+                    modelProfesor.setRowCount(0);
+                }
+
+                modelProfesor.setValueAt(profesor.getCedula(), 0, 0);
+                modelProfesor.setValueAt(profesor.getNombre(), 0, 1);
+                modelProfesor.setValueAt(profesor.getSalario(), 0, 2);
+                modelProfesor.setValueAt(profesor.getEscuela(), 0, 3);
+
+                tablaProfes.setModel(modelProfesor);
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Digite solamente numeros por favor");
+            }
+        }
+    }//GEN-LAST:event_btnConsultaCedulaActionPerformed
+
+    private void btnConsultaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaNombreActionPerformed
+        // TODO add your handling code here:
+        if (txtNombre.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Digite el nombre por favor");
+        } else {
+            List<Profesor> listanombresProfesor = new ArrayList();
+            
+            listanombresProfesor = profeBo.consultaNombre(txtNombre.getText());
+            
+            modelProfesor.setNumRows(listanombresProfesor.size());
+            
+            for (int i = 0; i < listanombresProfesor.size(); i++) {
+                Profesor profesor = listanombresProfesor.get(i);
+                modelProfesor.setValueAt(profesor.getCedula(), i, 0);
+                modelProfesor.setValueAt(profesor.getNombre(), i, 1);
+                modelProfesor.setValueAt(profesor.getSalario(), i, 2);
+                modelProfesor.setValueAt(profesor.getEscuela(), i, 3);
+            }
+            tablaProfes.setModel(modelProfesor);
+        }
+    }//GEN-LAST:event_btnConsultaNombreActionPerformed
 
     public Boolean validarDatos() {
         boolean bandera = true;

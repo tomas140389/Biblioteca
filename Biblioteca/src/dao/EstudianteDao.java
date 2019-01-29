@@ -175,7 +175,7 @@ public class EstudianteDao {
                     estudiante.setCedula(rs.getInt("cedula"));
                     estudiante.setNombre(rs.getString("nombre"));
                     estudiante.setCarrera(rs.getString("carrera"));
-                    estudiante.setCarnet(rs.getInt("carne"));
+                    estudiante.setCarnet(rs.getInt("carnet"));
                 }
                 conexion.desconectar();
                 return estudiante;

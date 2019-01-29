@@ -7,6 +7,7 @@ package pantallas;
 
 import bo.EstudianteBo;
 import clases.Estudiante;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -161,7 +162,7 @@ public class MantEstudiante extends javax.swing.JFrame {
         jLabel3.setText("Nombre");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Mantenimiento de Profesores");
+        jLabel4.setText("Mantenimiento de Estudiantes");
 
         jLabel5.setText("Carrera");
 
@@ -187,8 +188,18 @@ public class MantEstudiante extends javax.swing.JFrame {
         });
 
         btnConsultaCedula.setText("Consulta por cedula");
+        btnConsultaCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaCedulaActionPerformed(evt);
+            }
+        });
 
         btnConsultaNombre.setText("Consulta por nombre");
+        btnConsultaNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaNombreActionPerformed(evt);
+            }
+        });
 
         tablaEstudiante.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -408,6 +419,60 @@ public class MantEstudiante extends javax.swing.JFrame {
             txtCedula.setEnabled(false);
         }
     }//GEN-LAST:event_tablaEstudianteMouseClicked
+
+    private void btnConsultaCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaCedulaActionPerformed
+        // TODO add your handling code here:
+        if (txtCedula.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Digite la cedula del estudiante por favor");
+        } else {
+            try {
+                modeloEstudiante.setRowCount(0);
+                
+                Estudiante estudiante = new Estudiante();
+
+                estudiante = estudianteBo.consultaCedula(Integer.parseInt(txtCedula.getText()));   
+                                
+                
+                if (estudiante.getCedula() == Integer.parseInt(txtCedula.getText())) {
+                    modeloEstudiante.setRowCount(1);
+                } else {
+                    modeloEstudiante.setRowCount(0);
+                }
+
+                modeloEstudiante.setValueAt(estudiante.getCedula(), 0, 0);
+                modeloEstudiante.setValueAt(estudiante.getNombre(), 0, 1);
+                modeloEstudiante.setValueAt(estudiante.getCarrera(), 0, 2);
+                modeloEstudiante.setValueAt(estudiante.getCarnet(), 0, 3);
+
+                tablaEstudiante.setModel(modeloEstudiante);
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Digite solamente numeros por favor");
+            }
+        }
+    }//GEN-LAST:event_btnConsultaCedulaActionPerformed
+
+    private void btnConsultaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaNombreActionPerformed
+        // TODO add your handling code here:
+        if(txtNombre.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Digite el nombre por favor");
+        }else{
+            List<Estudiante> listaEstudiantes = new ArrayList();
+            
+            listaEstudiantes = estudianteBo.consultaNombre(txtNombre.getText());
+            
+            modeloEstudiante.setNumRows(listaEstudiantes.size());
+            
+            for (int i = 0; i < listaEstudiantes.size(); i++) {
+                Estudiante estudiante = listaEstudiantes.get(i);
+                modeloEstudiante.setValueAt(estudiante.getCedula(), i, 0);
+                modeloEstudiante.setValueAt(estudiante.getNombre(), i, 1);
+                modeloEstudiante.setValueAt(estudiante.getCarrera(), i, 2);
+                modeloEstudiante.setValueAt(estudiante.getCarnet(), i, 3);
+            }
+            tablaEstudiante.setModel(modeloEstudiante);
+        } 
+    }//GEN-LAST:event_btnConsultaNombreActionPerformed
 
     /**
      * @param args the command line arguments

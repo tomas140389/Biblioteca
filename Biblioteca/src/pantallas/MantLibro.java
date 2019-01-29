@@ -17,10 +17,10 @@ import javax.swing.table.DefaultTableModel;
  * @author anyelacristinadaza
  */
 public class MantLibro extends javax.swing.JFrame {
-    
+
     private DefaultTableModel tablaModelo;
     private LibroBo libroBo;
-    
+
     public MantLibro() {
         initComponents();
         libroBo = new LibroBo();
@@ -28,27 +28,27 @@ public class MantLibro extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         llenarTabla();
     }
-    
+
     public void llenarTabla() {
         this.tablaModelo = new DefaultTableModel() {
             public boolean isCellEditable(int row, int colum) {
                 return false;
             }
         };
-        
+
         this.tablaModelo.setColumnCount(0);//Vamos a trabajar en la columna 0
         this.tablaModelo.addColumn("Codigo");
         this.tablaModelo.addColumn("Nombre");
         this.tablaModelo.addColumn("Autor");
         this.tablaModelo.addColumn("Año");
         this.tablaModelo.addColumn("Precio");
-        
+
         List<Libro> listaLibros = new ArrayList();
-        
+
         listaLibros = libroBo.consultaTodos();
-        
+
         tablaModelo.setNumRows(listaLibros.size());
-        
+
         for (int i = 0; i < listaLibros.size(); i++) {
             Libro libro = listaLibros.get(i);
             tablaModelo.setValueAt(libro.getCodigo(), i, 0);
@@ -59,10 +59,10 @@ public class MantLibro extends javax.swing.JFrame {
         }
         tablaLibro.setModel(tablaModelo);
     }
-    
+
     public boolean validarDatos() {
         boolean bandera = true;
-        
+
         if (txtCodigo.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite el codigo del libro por favor");
             bandera = false;
@@ -74,19 +74,19 @@ public class MantLibro extends javax.swing.JFrame {
                 bandera = false;
             }
         }
-        
+
         if (txtNombre.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite el nombre del libro por favor");
             bandera = false;
         }
-        
+
         if (txtAno.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite el año del libro por favor");
             bandera = false;
         } else {
             try {
                 int numero = Integer.parseInt(txtAno.getText());
-                
+
                 if (numero < 1000 || numero > 9999) {
                     JOptionPane.showMessageDialog(null, "Digite un año valido");
                     bandera = false;
@@ -96,7 +96,7 @@ public class MantLibro extends javax.swing.JFrame {
                 bandera = false;
             }
         }
-        
+
         if (txtPrecio.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite el precio del libro por favor");
             bandera = false;
@@ -108,7 +108,7 @@ public class MantLibro extends javax.swing.JFrame {
                 bandera = false;
             }
         }
-        
+
         if (txtAutor.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite el autor del libro por favor");
             bandera = false;
@@ -138,7 +138,7 @@ public class MantLibro extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        btnConsultaCedula = new javax.swing.JButton();
+        btnConsultaCodigo = new javax.swing.JButton();
         btnConsultaNombre = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaLibro = new javax.swing.JTable();
@@ -186,14 +186,19 @@ public class MantLibro extends javax.swing.JFrame {
             }
         });
 
-        btnConsultaCedula.setText("Consulta por codigo");
-        btnConsultaCedula.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultaCodigo.setText("Consulta por codigo");
+        btnConsultaCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultaCedulaActionPerformed(evt);
+                btnConsultaCodigoActionPerformed(evt);
             }
         });
 
         btnConsultaNombre.setText("Consulta por nombre");
+        btnConsultaNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaNombreActionPerformed(evt);
+            }
+        });
 
         tablaLibro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -257,7 +262,7 @@ public class MantLibro extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnConsultaCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnConsultaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btnAgregar)
                                     .addGap(17, 17, 17)
@@ -303,7 +308,7 @@ public class MantLibro extends javax.swing.JFrame {
                         .addComponent(btnLimpiar))
                     .addGap(21, 21, 21)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnConsultaCedula)
+                        .addComponent(btnConsultaCodigo)
                         .addComponent(btnConsultaNombre))
                     .addGap(31, 31, 31)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,27 +327,27 @@ public class MantLibro extends javax.swing.JFrame {
             libro.setAutor(txtAutor.getText());
             libro.setAno(Integer.parseInt(txtAno.getText()));
             libro.setPrecio(Double.parseDouble(txtPrecio.getText()));
-            
+
             int resultado = libroBo.insertar(libro);
-            
+
             switch (resultado) {
                 case 0:
                     JOptionPane.showMessageDialog(null, "EL registro se guardo correctamente");
                     break;
-                
+
                 case 1:
                     JOptionPane.showMessageDialog(null, "No se conecto a la BD");
                     break;
-                
+
                 case 2:
                     JOptionPane.showMessageDialog(null, "Registro ya existente");
                     break;
-                
+
                 case 3:
                     JOptionPane.showMessageDialog(null, "Ocurrio un error");
                     break;
             }
-            
+
         }
         limpiar();
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -354,29 +359,29 @@ public class MantLibro extends javax.swing.JFrame {
         } else {
             try {
                 Libro libro = new Libro();
-                
+
                 libro.setCodigo(Integer.parseInt(txtCodigo.getText()));
-                
+
                 int resultado = libroBo.eliminar(libro);
-                
+
                 switch (resultado) {
                     case 0:
                         JOptionPane.showMessageDialog(null, "No se pudo eliminar el registro");
                         break;
-                    
+
                     case 1:
                         JOptionPane.showMessageDialog(null, "Se elimino el registro correctamente");
                         break;
-                    
+
                     case 2:
                         JOptionPane.showMessageDialog(null, "No se conecto a la BD");
                         break;
-                    
+
                     case 3:
                         JOptionPane.showMessageDialog(null, "Ocurrio un error inesperado");
                         break;
                 }
-                
+
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Digite solamente numeros por favor");
             }
@@ -387,30 +392,30 @@ public class MantLibro extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         if (validarDatos()) {
-            
+
             Libro libro = new Libro();
             libro.setCodigo(Integer.parseInt(txtCodigo.getText()));
             libro.setNombre(txtNombre.getText());
             libro.setAutor(txtAutor.getText());
             libro.setAno(Integer.parseInt(txtAno.getText()));
             libro.setPrecio(Double.parseDouble(txtPrecio.getText()));
-            
+
             int resultado = libroBo.modificar(libro);
-            
+
             switch (resultado) {
                 case 0:
                     JOptionPane.showMessageDialog(null, "EL registro se modifico correctamente");
                     break;
-                
+
                 case 1:
                     JOptionPane.showMessageDialog(null, "No se modifico el registro");
                     break;
-                
+
                 case 2:
                     JOptionPane.showMessageDialog(null, "Ocurrio un error inesperado");
                     break;
             }
-            
+
         }
         limpiar();
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -433,7 +438,7 @@ public class MantLibro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tablaLibroMouseClicked
 
-    private void btnConsultaCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaCedulaActionPerformed
+    private void btnConsultaCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaCodigoActionPerformed
         // TODO add your handling code here:
         if (txtCodigo.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite el codigo por favor");
@@ -441,29 +446,58 @@ public class MantLibro extends javax.swing.JFrame {
             try {
                 //Limpio la tabla
                 this.tablaModelo.setRowCount(0);
-                
+
                 int codigo = Integer.parseInt(txtCodigo.getText());
-                
+
                 Libro libro = new Libro();
-                
+
                 libro = libroBo.consultaCodigo(codigo);
-                tablaModelo.setRowCount(1);
-                
+
+                if (libro.getCodigo() == codigo) {
+                    tablaModelo.setRowCount(1);
+                } else {
+                    tablaModelo.setRowCount(0);
+                }
+
                 tablaModelo.setValueAt(libro.getCodigo(), 0, 0);
                 tablaModelo.setValueAt(libro.getNombre(), 0, 1);
                 tablaModelo.setValueAt(libro.getAutor(), 0, 2);
                 tablaModelo.setValueAt(libro.getAno(), 0, 3);
                 tablaModelo.setValueAt(libro.getPrecio(), 0, 4);
-                
+
                 tablaLibro.setModel(tablaModelo);
-                
+
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Digite solamente numeros por favor");
             }
         }
 
-    }//GEN-LAST:event_btnConsultaCedulaActionPerformed
-    
+    }//GEN-LAST:event_btnConsultaCodigoActionPerformed
+
+    private void btnConsultaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaNombreActionPerformed
+        // TODO add your handling code here:
+        if (txtNombre.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Digite el nombre del libro por favor");
+        } else {
+
+            List<Libro> listaNombreLibros = new ArrayList();
+
+            listaNombreLibros = libroBo.consultaNombre(txtNombre.getText());
+
+            tablaModelo.setNumRows(listaNombreLibros.size());
+
+            for (int i = 0; i < listaNombreLibros.size(); i++) {
+                Libro libro = listaNombreLibros.get(i);
+                tablaModelo.setValueAt(libro.getCodigo(), i, 0);
+                tablaModelo.setValueAt(libro.getNombre(), i, 1);
+                tablaModelo.setValueAt(libro.getAutor(), i, 2);
+                tablaModelo.setValueAt(libro.getAno(), i, 3);
+                tablaModelo.setValueAt(libro.getPrecio(), i, 4);
+            }
+            tablaLibro.setModel(tablaModelo);
+        }
+    }//GEN-LAST:event_btnConsultaNombreActionPerformed
+
     public void limpiar() {
         txtAno.setText("");
         txtAutor.setText("");
@@ -473,19 +507,19 @@ public class MantLibro extends javax.swing.JFrame {
         txtCodigo.setEnabled(true);
         llenarTabla();
     }
-    
+
     public DefaultTableModel getTablaModelo() {
         return tablaModelo;
     }
-    
+
     public void setTablaModelo(DefaultTableModel tablaModelo) {
         this.tablaModelo = tablaModelo;
     }
-    
+
     public LibroBo getLibroBo() {
         return libroBo;
     }
-    
+
     public void setLibroBo(LibroBo libroBo) {
         this.libroBo = libroBo;
     }
@@ -527,7 +561,7 @@ public class MantLibro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnConsultaCedula;
+    private javax.swing.JButton btnConsultaCodigo;
     private javax.swing.JButton btnConsultaNombre;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;

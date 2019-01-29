@@ -32,7 +32,7 @@ public class LibroBo {
         return libroDao.consultaCodigo(codigo);
     }
     
-    public List<Libro> conulstaNombre(String nombre){
+    public List<Libro> consultaNombre(String nombre){
         return libroDao.consultaNombre(nombre);
     }
 }

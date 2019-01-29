@@ -179,6 +179,7 @@ public class LibroDao {
                     libro.setAutor(rs.getString("autor"));
                     libro.setAno(rs.getInt("ano"));
                     libro.setPrecio(rs.getDouble("precio"));
+                    listaLibros.add(libro);
                 }
                 conexion.desconectar();
                 return listaLibros;
