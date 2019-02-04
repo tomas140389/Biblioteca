@@ -7,10 +7,15 @@ package pantallas;
 
 import bo.LibroBo;
 import clases.Libro;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -58,6 +63,13 @@ public class MantLibro extends javax.swing.JFrame {
             tablaModelo.setValueAt(libro.getPrecio(), i, 4);
         }
         tablaLibro.setModel(tablaModelo);
+
+        this.tablaLibro.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (int c = 0; c < this.tablaLibro.getColumnCount(); c++) {
+            empacarColumna(this.tablaLibro, c, 2);
+        }
+
     }
 
     public boolean validarDatos() {
@@ -114,6 +126,26 @@ public class MantLibro extends javax.swing.JFrame {
             bandera = false;
         }
         return bandera;
+    }
+
+    public void empacarColumna(JTable table, int vColIndex, int margin) {
+        DefaultTableColumnModel colModel = (DefaultTableColumnModel) table.getColumnModel();
+        TableColumn col = colModel.getColumn(vColIndex);
+        int width = 0;
+        TableCellRenderer renderer = col.getHeaderRenderer();
+        if (renderer == null) {
+            renderer = table.getTableHeader().getDefaultRenderer();
+        }
+        Component comp = renderer.getTableCellRendererComponent(table, col.getHeaderValue(), false, false, 0, 0);
+        width = comp.getPreferredSize().width;
+        for (int r = 0; r < table.getRowCount(); r++) {
+            renderer = table.getCellRenderer(r, vColIndex);
+            comp = renderer.getTableCellRendererComponent(
+                    table, table.getValueAt(r, vColIndex), false, false, r, vColIndex);
+            width = Math.max(width, comp.getPreferredSize().width);
+        }
+        width += 2 * margin;
+        col.setPreferredWidth(width);
     }
 
     /**
