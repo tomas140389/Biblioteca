@@ -27,13 +27,13 @@ public class Conexion {
             return false;
         }
     }
-    
-    public boolean desconectar(){
-        
-        try{
+
+    public boolean desconectar() {
+
+        try {
             conexion.close();
             return true;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }

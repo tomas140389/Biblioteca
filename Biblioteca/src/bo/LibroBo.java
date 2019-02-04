@@ -35,4 +35,14 @@ public class LibroBo {
     public List<Libro> consultaNombre(String nombre){
         return libroDao.consultaNombre(nombre);
     }
+
+    public LibroDao getLibroDao() {
+        return libroDao;
+    }
+
+    public void setLibroDao(LibroDao libroDao) {
+        this.libroDao = libroDao;
+    }
+    
+    
 }

@@ -84,8 +84,7 @@ public class LibroDao {
                 pst.setString(2, libro.getAutor());
                 pst.setInt(3, libro.getAno());
                 pst.setDouble(4, libro.getPrecio());
-                pst.setInt(5, libro.getCodigo());
-                int resultado = pst.executeUpdate();
+                pst.setInt(5, libro.getCodigo());                
                 conexion.desconectar();
                 return 0;
             } else {
