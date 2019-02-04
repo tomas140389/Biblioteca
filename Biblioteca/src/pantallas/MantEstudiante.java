@@ -25,6 +25,7 @@ public class MantEstudiante extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         estudianteBo = new EstudianteBo();
+        modeloEstudiante = new DefaultTableModel();
         llenarTabla();
     }
 
@@ -99,8 +100,8 @@ public class MantEstudiante extends javax.swing.JFrame {
         txtCarrera.setText("");
         txtCedula.setText("");
         txtNombre.setText("");
-        llenarTabla();
         txtCedula.setEnabled(true);
+        llenarTabla();
     }
 
     public EstudianteBo getEstudianteBo() {
@@ -344,8 +345,6 @@ public class MantEstudiante extends javax.swing.JFrame {
 
         } else {
             try {
-                //int numero = Integer.parseInt(txtCedula.getText());
-
                 Estudiante estudiante = new Estudiante();
 
                 estudiante.setCedula(Integer.parseInt(txtCedula.getText()));
@@ -427,12 +426,11 @@ public class MantEstudiante extends javax.swing.JFrame {
         } else {
             try {
                 modeloEstudiante.setRowCount(0);
-                
+
                 Estudiante estudiante = new Estudiante();
 
-                estudiante = estudianteBo.consultaCedula(Integer.parseInt(txtCedula.getText()));   
-                                
-                
+                estudiante = estudianteBo.consultaCedula(Integer.parseInt(txtCedula.getText()));
+
                 if (estudiante.getCedula() == Integer.parseInt(txtCedula.getText())) {
                     modeloEstudiante.setRowCount(1);
                 } else {
@@ -454,15 +452,14 @@ public class MantEstudiante extends javax.swing.JFrame {
 
     private void btnConsultaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaNombreActionPerformed
         // TODO add your handling code here:
-        if(txtNombre.getText().trim().equals("")){
+        if (txtNombre.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite el nombre por favor");
-        }else{
-            List<Estudiante> listaEstudiantes = new ArrayList();
+        } else {
             
-            listaEstudiantes = estudianteBo.consultaNombre(txtNombre.getText());
-            
+            List<Estudiante> listaEstudiantes = estudianteBo.consultaNombre(txtNombre.getText());
+
             modeloEstudiante.setNumRows(listaEstudiantes.size());
-            
+
             for (int i = 0; i < listaEstudiantes.size(); i++) {
                 Estudiante estudiante = listaEstudiantes.get(i);
                 modeloEstudiante.setValueAt(estudiante.getCedula(), i, 0);
@@ -471,7 +468,7 @@ public class MantEstudiante extends javax.swing.JFrame {
                 modeloEstudiante.setValueAt(estudiante.getCarnet(), i, 3);
             }
             tablaEstudiante.setModel(modeloEstudiante);
-        } 
+        }
     }//GEN-LAST:event_btnConsultaNombreActionPerformed
 
     /**

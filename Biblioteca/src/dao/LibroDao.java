@@ -1,7 +1,6 @@
 package dao;
 
 import clases.Libro;
-import com.mysql.cj.protocol.Resultset;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +18,6 @@ public class LibroDao {
     }
 
     public Integer insertar(Libro libro) {
-
         try {
             if (conexion.conectarse()) {
 
@@ -47,7 +45,6 @@ public class LibroDao {
     }
 
     public Integer eliminar(Libro libro) {
-
         try {
             if (conexion.conectarse()) {
 
@@ -74,7 +71,6 @@ public class LibroDao {
     }
 
     public Integer modificar(Libro libro) {
-
         try {
             if (conexion.conectarse()) {
 
@@ -97,7 +93,6 @@ public class LibroDao {
     }
 
     public List<Libro> consultaTodos() {
-
         try {
             if (conexion.conectarse()) {
 
@@ -159,7 +154,6 @@ public class LibroDao {
     }
 
     public List<Libro> consultaNombre(String nombre) {
-
         try {
             if (conexion.conectarse()) {
 

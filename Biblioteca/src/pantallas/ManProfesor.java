@@ -16,6 +16,14 @@ public class ManProfesor extends javax.swing.JFrame {
     private ProfeoBo profeBo;
     private DefaultTableModel modelProfesor;
 
+    public ManProfesor() {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.profeBo = new ProfeoBo();
+        this.modelProfesor = new DefaultTableModel();
+        this.llenarTabla();//Para que se ejecute de una vez apenas arranca el programa
+    }
+
     public void llenarTabla() {
 
         this.modelProfesor = new DefaultTableModel() {
@@ -43,30 +51,6 @@ public class ManProfesor extends javax.swing.JFrame {
             modelProfesor.setValueAt(prof.getEscuela(), i, 3);
         }
         this.tablaProfes.setModel(modelProfesor);
-    }
-
-    public DefaultTableModel getModelProfesor() {
-        return modelProfesor;
-    }
-
-    public void setModelProfesor(DefaultTableModel modelProfesor) {
-        this.modelProfesor = modelProfesor;
-    }
-
-    public ProfeoBo getProfeBo() {
-        return profeBo;
-    }
-
-    public void setProfeBo(ProfeoBo profeBo) {
-        this.profeBo = profeBo;
-    }
-
-    public ManProfesor() {
-        initComponents();
-        this.setLocationRelativeTo(null);
-        this.profeBo = new ProfeoBo();
-        this.modelProfesor = new DefaultTableModel();
-        this.llenarTabla();//Para que se ejecute de una vez apenas arranca el programa
     }
 
     /**
@@ -244,14 +228,10 @@ public class ManProfesor extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtCedula.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite la cedula del profesor.");
-
         } else {
-
             try {
-                int num = Integer.parseInt(txtCedula.getText());
-
                 Profesor profesor = new Profesor();
-                profesor.setCedula(num);
+                profesor.setCedula(Integer.parseInt(txtCedula.getText()));
 
                 int resultadoNumero = profeBo.eliminar(profesor);
 
@@ -357,13 +337,11 @@ public class ManProfesor extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtNombre.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite el nombre por favor");
-        } else {
-            List<Profesor> listanombresProfesor = new ArrayList();
-            
-            listanombresProfesor = profeBo.consultaNombre(txtNombre.getText());
-            
+        } else {            
+            List <Profesor> listanombresProfesor = profeBo.consultaNombre(txtNombre.getText());
+
             modelProfesor.setNumRows(listanombresProfesor.size());
-            
+
             for (int i = 0; i < listanombresProfesor.size(); i++) {
                 Profesor profesor = listanombresProfesor.get(i);
                 modelProfesor.setValueAt(profesor.getCedula(), i, 0);
@@ -458,6 +436,22 @@ public class ManProfesor extends javax.swing.JFrame {
                 new ManProfesor().setVisible(true);
             }
         });
+    }
+
+    public DefaultTableModel getModelProfesor() {
+        return modelProfesor;
+    }
+
+    public void setModelProfesor(DefaultTableModel modelProfesor) {
+        this.modelProfesor = modelProfesor;
+    }
+
+    public ProfeoBo getProfeBo() {
+        return profeBo;
+    }
+
+    public void setProfeBo(ProfeoBo profeBo) {
+        this.profeBo = profeBo;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -19,7 +19,6 @@ public class EstudianteDao {
     }
 
     public Integer insertar(Estudiante estudiante) {
-
         try {
             if (conexion.conectarse()) {
                 pst = conexion.getConexion().prepareStatement("insert into biblioteca.estudiante values (?,?,?,?)");
@@ -47,7 +46,6 @@ public class EstudianteDao {
     }
 
     public Integer eliminar(Estudiante estudiante) {
-
         try {
             if (conexion.conectarse()) {
 
@@ -68,12 +66,12 @@ public class EstudianteDao {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             return 3;
         }
     }
 
     public Integer modificar(Estudiante estudiante) {
-
         try {
             if (conexion.conectarse()) {
                 pst = conexion.getConexion().prepareStatement("update biblioteca.estudiante set nombre = ?, carrera = ?, carnet = ? where cedula = ?");
@@ -90,12 +88,12 @@ public class EstudianteDao {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             return 2;
         }
     }
 
     public List<Estudiante> consutaTodos() {
-
         try {
             if (conexion.conectarse()) {
 
@@ -122,12 +120,12 @@ public class EstudianteDao {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         }
     }
 
     public List<Estudiante> consultaNombre(String nombre) {
-
         try {
             if (conexion.conectarse()) {
                 pst = conexion.getConexion().prepareStatement("select * from biblioteca.estudiante where nombre like ?");
@@ -155,12 +153,12 @@ public class EstudianteDao {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         }
     }
 
     public Estudiante consultaCedula(int cedula) {
-
         try {
             if (conexion.conectarse()) {
                 pst = conexion.getConexion().prepareStatement("select * from biblioteca.estudiante where cedula = ?");
@@ -186,6 +184,7 @@ public class EstudianteDao {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         }
 

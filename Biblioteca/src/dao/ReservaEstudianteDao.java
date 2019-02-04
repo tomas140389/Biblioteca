@@ -68,6 +68,7 @@ public class ReservaEstudianteDao {
                 return null;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         }
     }

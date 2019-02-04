@@ -87,8 +87,5 @@ public class ReservaProfesorDao {
 
     public void setPst(PreparedStatement pst) {
         this.pst = pst;
-    }
-
-    
-    
+    }   
 }

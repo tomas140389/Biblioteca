@@ -9,7 +9,6 @@ public class Conexion {
     private Connection conexion;
 
     public boolean conectarse() {
-
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/biblioteca?useSSL=false&serverTimezone=UTC";
@@ -29,7 +28,6 @@ public class Conexion {
     }
 
     public boolean desconectar() {
-
         try {
             conexion.close();
             return true;

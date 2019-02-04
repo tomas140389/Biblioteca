@@ -6,14 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ProfesorDao {
 
     private Conexion conexion;
-    private PreparedStatement pst;
-    //private ResultSet rs;
+    private PreparedStatement pst;    
 
     //Siempre inicializar desde el contructor
     public ProfesorDao() {
@@ -175,17 +172,13 @@ public class ProfesorDao {
     public Profesor consultaCedula(int cedula) {
 
         try {
-            if (conexion.conectarse()) {
-
-                //El like se utiliza con strings, para que todos empiezen con letras en especifico, busqueda general
-                pst = conexion.getConexion().prepareStatement("select * from biblioteca.profesor where cedula = ?");
-
-                //Los porcentajes es para que busque al inicio o al final
+            if (conexion.conectarse()) {                
+                pst = conexion.getConexion().prepareStatement("select * from biblioteca.profesor where cedula = ?");                
                 pst.setInt(1, cedula);
 
                 ResultSet rs = pst.executeQuery();
 
-                Profesor profe = new Profesor();//Aca es solo un objeto y ademas debe retornar profe
+                Profesor profe = new Profesor();//Aca es solo un objeto y ademas debe retornar profeS
 
                 while (rs.next()) {
                     profe.setCedula(rs.getInt("cedula"));

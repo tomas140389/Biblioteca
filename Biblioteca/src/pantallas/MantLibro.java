@@ -48,9 +48,7 @@ public class MantLibro extends javax.swing.JFrame {
         this.tablaModelo.addColumn("Año");
         this.tablaModelo.addColumn("Precio");
 
-        List<Libro> listaLibros = new ArrayList();
-
-        listaLibros = libroBo.consultaTodos();
+        List<Libro> listaLibros = libroBo.consultaTodos();
 
         tablaModelo.setNumRows(listaLibros.size());
 
@@ -69,7 +67,6 @@ public class MantLibro extends javax.swing.JFrame {
         for (int c = 0; c < this.tablaLibro.getColumnCount(); c++) {
             empacarColumna(this.tablaLibro, c, 2);
         }
-
     }
 
     public boolean validarDatos() {
@@ -391,7 +388,6 @@ public class MantLibro extends javax.swing.JFrame {
         } else {
             try {
                 Libro libro = new Libro();
-
                 libro.setCodigo(Integer.parseInt(txtCodigo.getText()));
 
                 int resultado = libroBo.eliminar(libro);
@@ -511,10 +507,7 @@ public class MantLibro extends javax.swing.JFrame {
         if (txtNombre.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite el nombre del libro por favor");
         } else {
-
-            List<Libro> listaNombreLibros = new ArrayList();
-
-            listaNombreLibros = libroBo.consultaNombre(txtNombre.getText());
+            List<Libro> listaNombreLibros = libroBo.consultaNombre(txtNombre.getText());
 
             tablaModelo.setNumRows(listaNombreLibros.size());
 
